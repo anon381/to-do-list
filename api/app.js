@@ -1,4 +1,3 @@
-// Consolidated serverless API to share a single /tmp JSON DB across endpoints on Vercel.
 import { loadDB, saveDB } from './_db.js';
 import { randomUUID } from 'crypto';
 import bcrypt from 'bcryptjs';
@@ -6,8 +5,8 @@ import url from 'url';
 
 export default async function handler(req, res) {
   try {
-  const parsed = url.parse(req.url, true); // includes pathname & query
-  // When routed via rewrite we attach original path in ?path=
+  const parsed = url.parse(req.url, true);
+  
   const rawPath = parsed.query.path ? '/' + parsed.query.path : (parsed.pathname || '').replace(/^\/api/, '') || '/';
   const path = rawPath.replace(/\/+/g, '/');
     const method = req.method;
@@ -18,14 +17,13 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS');
     if (method === 'OPTIONS') return res.status(204).end();
 
-    if (path === '/health') {
-      // Health endpoint: simple liveness probe
+  if (path === '/health') {
       return res.json({ ok: true, ts: new Date().toISOString() });
     }
 
     // Public auth endpoints
-  if (path === '/signup' && method === 'POST') return signup(req, res); // User registration
-  if (path === '/login' && method === 'POST') return login(req, res);   // User login
+  if (path === '/signup' && method === 'POST') return signup(req, res);
+  if (path === '/login' && method === 'POST') return login(req, res);
 
     // Auth required for remaining /todos routes
     if (path.startsWith('/todos')) {
@@ -33,8 +31,7 @@ export default async function handler(req, res) {
       const user = authenticate(req, res, db);
       if (!user) return; // response already sent
 
-      if (path === '/todos' && method === 'GET') {
-        // Return all todos for authenticated user
+  if (path === '/todos' && method === 'GET') {
         return res.json({ todos: user.todos });
       }
   if (path === '/todos' && method === 'POST') {
