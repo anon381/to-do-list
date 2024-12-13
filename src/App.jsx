@@ -13,7 +13,6 @@ export default function App() {
   const [error, setError] = useState('');
   const API = import.meta.env.VITE_API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:4000' : '');
 
-  // Logout helper (placed early so other functions can use it for 401 handling)
   const logout = () => {
     setToken(''); setUsername(''); setTodos([]); localStorage.removeItem('token'); localStorage.removeItem('username');
   };
@@ -27,7 +26,6 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
-  // Dynamic page-title reflecting remaining tasks
   useEffect(() => {
     const remaining = todos.filter(t => !t.done).length;
     document.title = remaining > 0 ? `Todo List (${remaining} pending)` : 'Todo List';
@@ -47,7 +45,7 @@ export default function App() {
     }
   };
 
-  useEffect(() => { fetchTodos(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { fetchTodos();
   }, [token]);
 
   const addTodo = async (text) => {
@@ -101,8 +99,6 @@ export default function App() {
     } catch(e){ setError(e.message); }
     finally { setLoading(false); }
   };
-
-  // logout now defined earlier
 
   return (
     <div className="app-shell">
