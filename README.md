@@ -1,4 +1,3 @@
-<!-- Project README: overview and usage documentation for the Todo List app -->
 
 ## Todo List
 wanna see it <a href="https://to-do-list-eight-ebon.vercel.app/"> live </a>
