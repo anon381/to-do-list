@@ -51,8 +51,8 @@ Any variable prefixed with `VITE_` in `.env` is exposed to the client. `VITE_API
 - JSON file persistence (`db.json`) in serverless functions is ephemeral; each cold start may have older or empty state and concurrent writes can race. For production use a real database (PlanetScale, Neon, KV, Upstash, etc.).
 - To avoid data loss, replace file write logic with a database adapter.
 
-### Serverless JSON storage path
-When deployed on Vercel the writable directory is `/tmp`. The functions now auto-switch to `/tmp/db.json` so writes succeed instead of returning 500 errors. This still does not persist across deployments or some cold starts. Locally you can override with an env var:
+### Serverless JSON storage path & consolidated function
+When deployed on Vercel the writable directory is `/tmp`. The API is now consolidated into a single `api/app.js` function so all routes share the same `/tmp/db.json` during a warm instance. Data is still ephemeral (lost on cold start / redeploy). Locally you can override with an env var:
 ```
 # PowerShell
 $Env:DB_FILE_DIR = "."; npm run dev
