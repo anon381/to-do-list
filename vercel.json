@@ -4,7 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/api/(.*)", "destination": "/api/app.js?path=$1" },
     { "source": "/((?!api|_next|assets|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
