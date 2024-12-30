@@ -5,32 +5,7 @@
       "username": "anon",
       "passwordHash": "$2a$10$zEggjhOET/pC8dNC.PEij.40ErCZttZGa/7iJHL9J/wO263/P2rhi",
       "token": "af1b4a7b-a91b-4f5d-b6d1-b38a52365769",
-      "todos": [
-        {
-          "id": "73e19b20-7137-4f7f-b198-4d9a41058f38",
-          "text": "a",
-          "done": false,
-          "createdAt": "2025-08-13T05:18:37.744Z"
-        },
-        {
-          "id": "331e090b-8f7d-48cd-9089-8ff026b24a43",
-          "text": "c",
-          "done": false,
-          "createdAt": "2025-08-13T05:18:38.315Z"
-        },
-        {
-          "id": "be7e3879-995a-446f-87e2-9d706998ea3a",
-          "text": "c",
-          "done": false,
-          "createdAt": "2025-08-13T05:18:39.274Z"
-        },
-        {
-          "id": "48e21200-7e5d-4709-bac9-3f07ece39671",
-          "text": "c",
-          "done": false,
-          "createdAt": "2025-08-13T05:18:39.930Z"
-        }
-      ]
+      "todos": []
     },
     {
       "id": "d7e5179f-05d1-4b52-98a8-f185e0c8d6b9",
