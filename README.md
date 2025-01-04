@@ -1,5 +1,5 @@
 # Todo List
-wanna see it <a href="https://to-do-list-eight-ebon.vercel.app/">live</a>
+wanna see it <a href="https://to-do-list-eight-ebon.vercel.app/"> live </a>
 ---
 
 Simple React todo list bootstrapped with Vite. Now includes auth + JSON file backend (development mode) and supports configurable API base URL for deployment.
@@ -39,7 +39,7 @@ Default URL: http://localhost:4000
 - If you do NOT want the local Express server anymore you can remove `server.js`.
 
 ## Environment Variables
-Any variable prefixed with `VITE_` in `.env` is exposed to the client. `VITE_API_BASE` overrides the auto relative `/api` base; usually leave it unset on Vercel.
+Any variable prefixed with `VITE_` in `.env` is exposed to the client. `VITE_API_BASE` overrides the auto relative `/api` base; usually leave it un-set on Vercel.
 
 ## Vercel Deploy Steps
 1. Add the repo to Vercel.
