@@ -1,4 +1,3 @@
-// Component: animated list of todos (enter/exit transitions)
 import { motion, AnimatePresence } from 'framer-motion';
 
 const variants = {
