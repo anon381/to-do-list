@@ -1,4 +1,5 @@
 import { loadDB, saveDB } from './_db.js';
+import { randomUUID } from 'crypto';
 
 function auth(req, res, db) {
   const authHeader = req.headers.authorization || '';
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { text } = req.body || {};
     if (!text || !text.trim()) return res.status(400).json({ error: 'text required' });
-    const todo = { id: crypto.randomUUID(), text: text.trim(), done: false, createdAt: new Date().toISOString() };
+  const todo = { id: randomUUID(), text: text.trim(), done: false, createdAt: new Date().toISOString() };
     user.todos.push(todo);
     saveDB(db);
     return res.status(201).json(todo);
