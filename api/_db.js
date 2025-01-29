@@ -9,7 +9,7 @@ export function loadDB() {
     return JSON.parse(readFileSync(dbPath, 'utf8'));
   } catch (e) {
     console.error('Failed to load DB file', e);
-    return { users: [] }; // Fallback empty structure keeps rest of code simple
+    return { users: [] }; 
   }
 }
 
