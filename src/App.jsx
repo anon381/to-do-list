@@ -17,7 +17,7 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
-  // Dynamic page title reflecting remaining tasks
+  // Dynamic page-title reflecting remaining tasks
   useEffect(() => {
     const remaining = todos.filter(t => !t.done).length;
     document.title = remaining > 0 ? `Todo List (${remaining} pending)` : 'Todo List';
