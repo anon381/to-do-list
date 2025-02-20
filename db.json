@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "id": "aacbbb9c-d6ae-4e00-ad93-6074f4cc9647",
+      "username": "anon",
+      "passwordHash": "$2a$10$zEggjhOET/pC8dNC.PEij.40ErCZttZGa/7iJHL9J/wO263/P2rhi",
+      "token": "af1b4a7b-a91b-4f5d-b6d1-b38a52365769",
+      "todos": [
+        {
+          "id": "73e19b20-7137-4f7f-b198-4d9a41058f38",
+          "text": "a",
+          "done": false,
+          "createdAt": "2025-08-13T05:18:37.744Z"
+        },
+        {
+          "id": "331e090b-8f7d-48cd-9089-8ff026b24a43",
+          "text": "c",
+          "done": false,
+          "createdAt": "2025-08-13T05:18:38.315Z"
+        },
+        {
+          "id": "be7e3879-995a-446f-87e2-9d706998ea3a",
+          "text": "c",
+          "done": false,
+          "createdAt": "2025-08-13T05:18:39.274Z"
+        },
+        {
+          "id": "48e21200-7e5d-4709-bac9-3f07ece39671",
+          "text": "c",
+          "done": false,
+          "createdAt": "2025-08-13T05:18:39.930Z"
+        }
+      ]
+    },
+    {
+      "id": "d7e5179f-05d1-4b52-98a8-f185e0c8d6b9",
+      "username": "anonizedd",
+      "passwordHash": "$2a$10$HBwgi1/076gp5SXKbLcc/.b60CK.vBGh5grzPg9Jq6LNF3bP1Q/Oa",
+      "token": "4d67b9c7-6ead-4f66-beb8-c00dc5af5c9f",
+      "todos": [
+        {
+          "id": "d1d322d8-b68c-4c50-b562-b402f22ec622",
+          "text": "a",
+          "done": true,
+          "createdAt": "2025-08-13T05:18:14.585Z",
+          "updatedAt": "2025-08-13T05:18:20.391Z"
+        },
+        {
+          "id": "65d3b09a-128c-4d6c-b2a1-1842cc7a456b",
+          "text": "b",
+          "done": true,
+          "createdAt": "2025-08-13T05:18:15.989Z",
+          "updatedAt": "2025-08-13T05:18:18.825Z"
+        },
+        {
+          "id": "bbdd2d7b-215e-44a9-a6a0-870a99a19997",
+          "text": "c",
+          "done": true,
+          "createdAt": "2025-08-13T05:18:16.909Z",
+          "updatedAt": "2025-08-13T05:18:21.624Z"
+        }
+      ]
+    }
+  ]
+}
