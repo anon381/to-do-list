@@ -11,7 +11,7 @@ export default function App() {
   const [username, setUsername] = useState(() => localStorage.getItem('username') || '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const API = 'http://localhost:4000';
+  const API = import.meta.env.VITE_API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:4000' : '');
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -26,12 +26,13 @@ export default function App() {
   const fetchTodos = async (activeToken = token) => {
     if (!activeToken) return;
     try {
-      const res = await fetch(`${API}/todos`, { headers: { Authorization: `Bearer ${activeToken}` } });
-      if (!res.ok) throw new Error('Failed to load todos');
+  const res = await fetch(`${API}${API ? '/todos' : '/api/todos'}`, { headers: { Authorization: `Bearer ${activeToken}` } });
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
       const data = await res.json();
       setTodos(data.todos || []);
     } catch (e) {
-      console.error(e);
+      console.error('Fetch todos failed', e);
+      setError('Unable to load todos');
     }
   };
 
@@ -41,34 +42,44 @@ export default function App() {
   const addTodo = async (text) => {
     if(!text.trim() || !token) return;
     try {
-      const res = await fetch(`${API}/todos`, { method:'POST', headers:{ 'Content-Type':'application/json', Authorization:`Bearer ${token}` }, body: JSON.stringify({ text }) });
+  const res = await fetch(`${API}${API ? '/todos' : '/api/todos'}`, { method:'POST', headers:{ 'Content-Type':'application/json', Authorization:`Bearer ${token}` }, body: JSON.stringify({ text }) });
       if(!res.ok) throw new Error('Add failed');
       const todo = await res.json();
       setTodos(prev => [...prev, todo]);
-    } catch(e){ console.error(e); }
+    } catch(e){ console.error(e); setError('Add failed'); }
   };
 
   const toggleTodo = async (id) => {
     setTodos(prev => prev.map(t => t.id === id ? { ...t, done: !t.done } : t));
-    try { await fetch(`${API}/todos/${id}/toggle`, { method:'PATCH', headers:{ Authorization:`Bearer ${token}` } }); } catch(e){ console.error(e); }
+    try {
+  const res = await fetch(`${API}${API ? `/todos/${id}/toggle` : `/api/todos/${id}/toggle`}`, { method:'PATCH', headers:{ Authorization:`Bearer ${token}` } });
+      if(!res.ok) throw new Error('Toggle failed');
+    } catch(e){ console.error(e); setError('Toggle failed'); }
   };
 
   const deleteTodo = async (id) => {
     setTodos(prev => prev.filter(t => t.id !== id));
-    try { await fetch(`${API}/todos/${id}`, { method:'DELETE', headers:{ Authorization:`Bearer ${token}` } }); } catch(e){ console.error(e); }
+    try {
+  const res = await fetch(`${API}${API ? `/todos/${id}` : `/api/todos/${id}`}`, { method:'DELETE', headers:{ Authorization:`Bearer ${token}` } });
+      if(!res.ok) throw new Error('Delete failed');
+    } catch(e){ console.error(e); setError('Delete failed'); }
   };
 
   const clearCompleted = async () => {
     setTodos(prev => prev.filter(t => !t.done));
-    try { await fetch(`${API}/todos?completed=true`, { method:'DELETE', headers:{ Authorization:`Bearer ${token}` } }); } catch(e){ console.error(e); }
+    try {
+  const res = await fetch(`${API}${API ? '/todos?completed=true' : '/api/todos?completed=true'}`, { method:'DELETE', headers:{ Authorization:`Bearer ${token}` } });
+      if(!res.ok) throw new Error('Clear failed');
+    } catch(e){ console.error(e); setError('Clear failed'); }
   }
 
   const authRequest = async (endpoint, creds) => {
     setLoading(true); setError('');
     try {
-      const res = await fetch(`${API}/${endpoint}`, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(creds) });
-      const data = await res.json();
-      if(!res.ok) throw new Error(data.error || 'Auth failed');
+  const base = API ? `${API}/${endpoint}` : `/api/${endpoint}`;
+  const res = await fetch(base, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(creds) });
+      const data = await res.json().catch(() => ({}));
+      if(!res.ok) throw new Error(data.error || res.status + ' ' + res.statusText);
       setToken(data.token); setUsername(data.username);
       localStorage.setItem('token', data.token); localStorage.setItem('username', data.username);
       fetchTodos(data.token);
@@ -103,6 +114,7 @@ export default function App() {
             {token && <button className="logout-btn" onClick={logout}>Logout</button>}
           </div>
         </header>
+  {error && <div className="error-banner" role="alert">{error} <button className="dismiss" onClick={() => setError('')}>✕</button></div>}
         {!token ? (
           <AuthPanel onSubmit={authRequest} loading={loading} error={error} />
         ) : (
