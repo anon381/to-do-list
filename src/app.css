@@ -42,7 +42,7 @@ body { font-family: system-ui, Arial, sans-serif; margin:0; background: var(--bg
 .app-container::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 80% 10%, rgba(99,102,241,.25), transparent 60%); pointer-events:none; }
 .app-header { display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; margin-bottom:24px; }
 .title-wrap { display:flex; align-items:center; gap:14px; }
-.gradient-text { background: var(--gradient-text); -webkit-background-clip:text; color:transparent; font-size: clamp(1.9rem, 4vw, 2.8rem); line-height:1.1; margin:0; font-weight:700; letter-spacing:.5px; }
+.gradient-text { background: var(--gradient-text); -webkit-background-clip:text; background-clip:text; color:transparent; font-size: clamp(1.9rem, 4vw, 2.8rem); line-height:1.1; margin:0; font-weight:700; letter-spacing:.5px; }
 .count-chip { background: var(--accent); color:#fff; padding:4px 10px 5px; font-size:.85rem; border-radius: 999px; font-weight:600; box-shadow: var(--shadow-sm); }
 .theme-toggle { background: var(--bg); border:1px solid var(--border); width:44px; height:44px; display:grid; place-items:center; font-size:1.25rem; border-radius: 14px; cursor:pointer; transition: background .25s, border-color .25s, transform .25s; }
 .theme-toggle:hover { background: var(--accent); color:#fff; border-color: var(--accent); transform: translateY(-2px); }
@@ -92,6 +92,9 @@ h1 { margin-top:0; }
 .auth-form .link-btn { background:transparent; border:none; color: var(--accent); cursor:pointer; font-size:.75rem; font-weight:600; letter-spacing:.4px; text-decoration:underline; padding:4px 4px 0; align-self:flex-start; }
 .auth-form .link-btn:hover { color: var(--accent-hover); }
 .error-msg { background: linear-gradient(90deg,#f87171,#ef4444); color:#fff; padding:8px 12px; border-radius: var(--radius-sm); font-size:.75rem; font-weight:600; letter-spacing:.5px; }
+.error-banner { margin-top:4px; background:linear-gradient(90deg,#f43f5e,#e11d48); color:#fff; padding:10px 14px; border-radius: var(--radius-md); font-size:.8rem; font-weight:600; display:flex; align-items:center; justify-content:space-between; gap:12px; box-shadow: var(--shadow-sm); }
+.error-banner .dismiss { background:rgba(255,255,255,.15); color:#fff; border:none; cursor:pointer; font-size:.9rem; padding:4px 8px; border-radius: var(--radius-sm); }
+.error-banner .dismiss:hover { background:rgba(255,255,255,.25); }
 
 /* Responsive layout tweaks */
 @media (max-width: 760px) {
