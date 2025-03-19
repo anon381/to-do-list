@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static-build", "config": { "distDir": "dist" } },
-    { "src": "api/**/*.[jt]s", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/((?!api|_next|assets|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
