@@ -1,4 +1,3 @@
-// Endpoint: user login (verifies credentials and returns token)
 import { loadDB, saveDB } from './_db.js';
 import { randomUUID } from 'crypto';
 import bcrypt from 'bcryptjs';
