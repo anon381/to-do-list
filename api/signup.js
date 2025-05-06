@@ -1,4 +1,3 @@
-// Endpoint: user signup (creates account and returns token)
 import { loadDB, saveDB } from './_db.js';
 import { randomUUID } from 'crypto';
 import bcrypt from 'bcryptjs';
