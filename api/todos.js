@@ -1,4 +1,3 @@
-// Endpoint: list/create/clear todos for authenticated user
 import { loadDB, saveDB } from './_db.js';
 import { randomUUID } from 'crypto';
 
