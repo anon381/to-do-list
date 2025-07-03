@@ -1,4 +1,3 @@
-// Endpoint: toggle a single todo's done state by ID
 import { loadDB, saveDB } from '../../_db.js';
 
 export default async function handler(req, res) {
