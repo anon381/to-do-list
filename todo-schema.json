@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/todo-list.schema.json",
+  "title": "TodoListDocument",
+  "type": "object",
+  "required": ["version", "user", "todos"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+$" },
+    "user": {
+      "type": "object",
+      "required": ["id", "displayName"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "todos": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/TodoItem" }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sort": { "type": "string", "enum": ["createdAt", "due", "priority"] },
+        "theme": { "type": "string", "enum": ["light", "dark", "system"] }
+      }
+    }
+  },
+  "$defs": {
+    "TodoItem": {
+      "type": "object",
+      "required": ["id", "text", "status", "createdAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "enum": ["pending", "in_progress", "done", "archived"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "due": { "type": "string", "format": "date-time" },
+        "priority": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "tags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+  "recurrence": { "$ref": "#/$defs/Recurrence" },
+  "subtasks": { "type": "array", "items": { "$ref": "#/$defs/Subtask" } },
+        "notes": { "type": "string" },
+        "meta": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "Subtask": {
+      "type": "object",
+      "required": ["id", "text", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "done"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Recurrence": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["daily", "weekly", "monthly", "yearly", "custom"] },
+        "interval": { "type": "integer", "minimum": 1 },
+        "weekdays": { "type": "array", "items": { "type": "string", "enum": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] }, "uniqueItems": true },
+        "count": { "type": "integer", "minimum": 1 },
+        "until": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}
