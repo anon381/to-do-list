@@ -1,0 +1,49 @@
+{
+  "version": "v1.0",
+  "user": {
+    "id": "user-123",
+    "displayName": "Jane Doe",
+    "email": "jane@example.com"
+  },
+  "generatedAt": "2025-02-15T10:05:00.000Z",
+  "preferences": {
+    "sort": "createdAt",
+    "theme": "system"
+  },
+  "todos": [
+    {
+      "id": "t1",
+      "text": "Set up project repository",
+      "status": "done",
+      "createdAt": "2025-02-10T09:00:00.000Z",
+      "updatedAt": "2025-02-10T09:10:00.000Z",
+      "completedAt": "2025-02-10T09:10:00.000Z",
+      "priority": 2,
+      "tags": ["project", "setup"],
+      "notes": "Initialized with Vite + React"
+    },
+    {
+      "id": "t2",
+      "text": "Design JSON schema for todos",
+      "status": "in_progress",
+      "createdAt": "2025-02-11T11:30:00.000Z",
+      "updatedAt": "2025-02-15T09:55:00.000Z",
+      "priority": 1,
+      "tags": ["schema", "backend"],
+      "notes": "Consider recurrence and subtasks",
+      "subtasks": [
+        { "id": "t2-1", "text": "Draft fields", "status": "done", "createdAt": "2025-02-11T11:35:00.000Z", "completedAt": "2025-02-11T12:00:00.000Z" },
+        { "id": "t2-2", "text": "Add validation rules", "status": "pending", "createdAt": "2025-02-11T12:05:00.000Z" }
+      ]
+    },
+    {
+      "id": "t3",
+      "text": "Implement local storage persistence",
+      "status": "pending",
+      "createdAt": "2025-02-15T09:50:00.000Z",
+      "priority": 3,
+      "tags": ["feature"],
+      "recurrence": { "type": "weekly", "interval": 1, "weekdays": ["Mon"] }
+    }
+  ]
+}
