@@ -1,4 +1,8 @@
-# Todo List
+
+---
+---
+
+## Todo List
 wanna see it <a href="https://to-do-list-eight-ebon.vercel.app/"> live </a>
 ---
 
@@ -33,13 +37,23 @@ npm run server
 ```
 Default URL: http://localhost:4000
 
+---
+
+---
 ## Deployment Notes
 - Serverless API routes added under `/api` (signup, login, todos, toggle). These run on Vercel automatically.
 - Frontend uses relative `/api/...` when not on localhost; in local dev still targets `http://localhost:4000` if you run the standalone server.
 - If you do NOT want the local Express server anymore you can remove `server.js`.
 
+---
+---
+
 ## Environment Variables
 Any variable prefixed with `VITE_` in `.env` is exposed to the client. `VITE_API_BASE` overrides the auto relative `/api` base; usually leave it un-set on Vercel.
+
+---
+
+---
 
 ## Vercel Deploy Steps
 1. Add the repo to Vercel.
@@ -47,5 +61,6 @@ Any variable prefixed with `VITE_` in `.env` is exposed to the client. `VITE_API
 3. Ensure `vercel.json` is present (already added) to route SPA + API.
 4. Deploy. Test endpoints: `https://your-app.vercel.app/api/health` (add a simple health route if needed) or `/api/todos` (after auth).
 
-
+---
+---
 
