@@ -43,7 +43,6 @@ Default URL: http://localhost:4000
 - If you do NOT want the local Express server anymore you can remove `server.js`.
 
 ---
----
 
 ## Environment Variables
 Any variable prefixed with `VITE_` in `.env` is exposed to the client. `VITE_API_BASE` overrides the auto relative `/api` base; usually leave it un-set on Vercel.
