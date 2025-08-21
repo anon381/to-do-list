@@ -1,6 +1,5 @@
 
 ## Todo List
-wanna see it <a href="https://to-do-list-eight-ebon.vercel.app/"> live </a>
 
 
 Simple React todo list bootstrapped with Vite. Now includes auth + JSON file backend (development mode) and supports configurable API base URL for deployment.
