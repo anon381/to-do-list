@@ -31,7 +31,8 @@ Minimal Express JSON file server (`server.js`). Start it separately:
 ```
 npm run server
 ```
-Default URL: http://localhost:4000
+Default URL:
+```http://localhost:4000```
 
 ---
 
