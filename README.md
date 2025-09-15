@@ -69,3 +69,7 @@ Or for one command:
 ```
 cmd /c "set DB_FILE_DIR=.&& npm run dev"
 ```
+
+---
+
+> ## THANK YOU
