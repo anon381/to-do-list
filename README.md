@@ -42,8 +42,6 @@ npm run server
 
 Default URL: http://localhost:4000
 
-Note: `npm run dev` already starts this backend automatically.
-
 ---
 
 ---
@@ -92,3 +90,7 @@ Or for one command:
 ```
 cmd /c "set DB_FILE_DIR=.&& npm run dev"
 ```
+
+---
+
+> ## THANK YOU
