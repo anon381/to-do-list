@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect, useState } from 'react';
+import { useDeferredValue, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
@@ -27,6 +27,7 @@ export default function App() {
   const [sortBy, setSortBy] = useState('manual');
   const [showArchived, setShowArchived] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const profileWrapRef = useRef(null);
   const deferredQuery = useDeferredValue(searchQuery.trim().toLowerCase());
   const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/$/, '');
   const endpoint = (path) => `${API_BASE}${path}`;
@@ -117,6 +118,7 @@ export default function App() {
           return [...prev, todo.category];
         });
       }
+      await fetchWorkspace(token);
       return true;
     } catch (addError) {
       console.error(addError);
@@ -146,6 +148,7 @@ export default function App() {
           return [...prev, todo.category];
         });
       }
+      await fetchWorkspace(token);
       return true;
     } catch (updateError) {
       console.error(updateError);
@@ -343,6 +346,33 @@ export default function App() {
     setCurrentPage((page) => Math.min(page, totalPages));
   }, [totalPages]);
 
+  useEffect(() => {
+    if (!profileOpen) return;
+
+    const handlePointerDown = (event) => {
+      if (!profileWrapRef.current) return;
+      if (!profileWrapRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('touchstart', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('touchstart', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [profileOpen]);
+
   return (
     <div className="app-shell">
       {token && (
@@ -354,7 +384,7 @@ export default function App() {
             <button className="theme-toggle" onClick={() => setTheme((currentTheme) => currentTheme === 'dark' ? 'light' : 'dark')} aria-label="Toggle theme">
               {theme === 'dark' ? '🌞' : '🌙'}
             </button>
-            <div className="profile-wrap">
+            <div className="profile-wrap" ref={profileWrapRef}>
               <button className="profile-trigger" onClick={() => setProfileOpen((open) => !open)}>
                 Profile
               </button>
@@ -559,8 +589,10 @@ function AuthPanel({ onSubmit, loading, error }) {
           </label>
         )}
         {error && <div className="error-msg" role="alert">{error}</div>}
-        <button type="submit" disabled={loading}>{loading ? 'Please wait...' : (mode === 'login' ? 'Login' : 'Sign up')}</button>
-        <button type="button" className="link-btn" onClick={toggle}>{mode === 'login' ? 'Need an account? Sign up' : 'Have an account? Log in'}</button>
+        <div className="auth-actions">
+          <button type="submit" disabled={loading}>{loading ? 'Please wait...' : (mode === 'login' ? 'Login' : 'Sign up')}</button>
+          <button type="button" className="link-btn" onClick={toggle}>{mode === 'login' ? 'Need an account? Sign up' : 'Have an account? Log in'}</button>
+        </div>
       </form>
     </motion.div>
   );

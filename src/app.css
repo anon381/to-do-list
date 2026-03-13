@@ -139,6 +139,12 @@ button, input, select, textarea { font: inherit; }
 .stat-danger strong { color: var(--danger); }
 
 .task-composer { display: grid; gap: 18px; padding: 28px; border-radius: 22px; background: var(--bg-alt); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 26px; }
+.composer-head { display: grid; gap: 4px; padding: 2px 2px 0; }
+.composer-head h3 { margin: 0; font-size: 1.08rem; letter-spacing: .01em; }
+.composer-head p { margin: 0; color: var(--text-soft); font-size: .9rem; }
+.composer-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: stretch; }
+.composer-main { display: grid; gap: 12px; }
+.composer-side-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-content: start; }
 .composer-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; }
 .composer-row.compact button { min-width: 126px; }
 .composer-grid { display: grid; gap: 12px; }
@@ -146,6 +152,9 @@ button, input, select, textarea { font: inherit; }
 .field-block { display: grid; gap: 6px; }
 .field-block span, .toolbar-search label, .toolbar-controls label span, .auth-form label span { color: var(--text-soft); font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 .field-span-2 { grid-column: span 2; }
+.task-composer .field-card { padding: 12px; border: 1px solid color-mix(in srgb, var(--border) 82%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--bg) 64%, transparent); }
+.task-submit-field { align-content: end; }
+.task-submit-btn { justify-self: start; width: 136px; min-width: 136px; max-width: 136px; min-height: 42px; }
 .task-composer textarea, .todo-editor textarea { resize: vertical; }
 .saved-category-box { border: 1px dashed var(--border); border-radius: 14px; padding: 12px; background: var(--bg); }
 .saved-category-box p { margin: 0 0 10px; color: var(--text-soft); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
@@ -206,10 +215,14 @@ button, input, select, textarea { font: inherit; }
 .auth-form { display: grid; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 22px; padding: 24px; box-shadow: var(--shadow-sm); }
 .auth-form h2 { margin: 0; }
 .auth-form label { display: grid; gap: 6px; }
-.auth-form .link-btn { background: transparent; border: none; color: var(--accent); text-align: left; padding: 0; cursor: pointer; font-weight: 700; }
+.auth-actions { display: flex; align-items: center; justify-content: flex-start; gap: 10px; flex-wrap: wrap; }
+.auth-form button[type='submit'] { width: auto; min-width: 130px; min-height: 44px; padding: 11px 16px; }
+.auth-form .link-btn { background: transparent; border: none; color: var(--accent); text-align: left; padding: 0; cursor: pointer; font-weight: 700; white-space: nowrap; }
 .error-msg { border-radius: 12px; padding: 10px 12px; background: linear-gradient(90deg,#f87171,#ef4444); color: #fff; font-weight: 700; }
 
 @media (max-width: 900px) {
+	.composer-layout { grid-template-columns: 1fr; }
+	.composer-side-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.toolbar-controls,
 	.responsive-four,
 	.todo-editor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -232,6 +245,7 @@ button, input, select, textarea { font: inherit; }
 	.header-actions,
 	.todo-editor-actions { width: 100%; justify-content: flex-start; }
 	.project-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.composer-side-grid { grid-template-columns: 1fr; }
 	.toolbar-controls,
 	.responsive-four,
 	.todo-editor-grid { grid-template-columns: 1fr; }
@@ -284,6 +298,7 @@ button, input, select, textarea { font: inherit; }
 	.nav-list-picker { width: 100%; }
 	.nav-list-picker select { min-width: 0; width: 100%; }
 	.table-pagination { justify-content: flex-start; }
+	.auth-form .link-btn { white-space: normal; }
 }
 
 @media (max-width: 420px) {
@@ -291,7 +306,8 @@ button, input, select, textarea { font: inherit; }
 	.app-container { min-height: calc(100dvh - 126px); padding: 14px; }
 	.count-chip { min-width: 34px; height: 34px; }
 	.project-rail { grid-template-columns: 1fr; }
-	.theme-toggle, .logout-btn, .archive-toggle, .project-create-form button, .task-composer button[type='submit'] { width: 100%; }
+	.logout-btn, .archive-toggle, .project-create-form button, .task-composer button[type='submit'] { width: auto; max-width: 100%; }
+	.project-create-form button, .task-composer button[type='submit'] { min-width: 120px; }
 	.todo-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 

@@ -1,5 +1,5 @@
 import { getUsersCollection, normalizeUser } from './_db.js';
-import { randomUUID } from 'crypto';
+import { buildTodoPayload, hasUserDataChanges, normalizeCustomCategories, normalizeUserDocument, shouldPersistCustomCategory } from './planner.js';
 
 async function auth(req, res, users) {
   const authHeader = req.headers.authorization || '';
@@ -7,11 +7,13 @@ async function auth(req, res, users) {
   if (!token) { res.status(401).json({ error: 'missing token' }); return null; }
   const user = normalizeUser(await users.findOne({ token }));
   if (!user) { res.status(401).json({ error: 'invalid token' }); return null; }
-  if (!Array.isArray(user.todos)) {
-    user.todos = [];
-    await users.updateOne({ id: user.id }, { $set: { todos: [] } });
+
+  const normalized = normalizeUserDocument(user);
+  if (hasUserDataChanges(user.projects, normalized.projects, user.todos, normalized.todos, user.customCategories, normalized.customCategories)) {
+    await users.updateOne({ id: user.id }, { $set: { projects: normalized.projects, todos: normalized.todos, customCategories: normalized.customCategories } });
   }
-  return user;
+
+  return { ...user, ...normalized };
 }
 
 export default async function handler(req, res) {
@@ -20,15 +22,39 @@ export default async function handler(req, res) {
   if (!user) return;
 
   if (req.method === 'GET') {
-    return res.json({ todos: user.todos });
+    return res.json({ todos: user.todos, projects: user.projects, customCategories: user.customCategories || [] });
   }
+
   if (req.method === 'POST') {
-    const { text } = req.body || {};
-    if (!text || !text.trim()) return res.status(400).json({ error: 'text required' });
-    const todo = { id: randomUUID(), text: text.trim(), done: false, createdAt: new Date().toISOString() };
-    await users.updateOne({ id: user.id }, { $push: { todos: todo } });
+    const payload = buildTodoPayload(req.body, {}, user.projects[0]?.id);
+    if (!payload.text) return res.status(400).json({ error: 'text required' });
+
+    const now = new Date().toISOString();
+    const nextOrder = user.todos
+      .filter((todo) => todo.projectId === payload.projectId)
+      .reduce((maxOrder, todo) => Math.max(maxOrder, todo.order), -1) + 1;
+
+    const todo = {
+      ...payload,
+      order: nextOrder,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    const nextTodos = [...user.todos, todo];
+    const shouldStoreCategory = shouldPersistCustomCategory(todo.category);
+    const nextCustomCategories = shouldStoreCategory
+      ? normalizeCustomCategories([...(user.customCategories || []), todo.category])
+      : (user.customCategories || []);
+
+    await users.updateOne(
+      { id: user.id },
+      { $set: { todos: nextTodos, customCategories: nextCustomCategories } }
+    );
+
     return res.status(201).json(todo);
   }
+
   if (req.method === 'DELETE') {
     const { completed } = req.query || {};
     if (completed === 'true') {
