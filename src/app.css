@@ -43,18 +43,19 @@ body { font-family: system-ui, Arial, sans-serif; margin:0; background: var(--bg
 .title-wrap { display:flex; align-items:center; gap:14px; }
 .gradient-text { background: var(--gradient-text); -webkit-background-clip:text; background-clip:text; color:transparent; font-size: clamp(1.9rem, 4vw, 2.8rem); line-height:1.1; margin:0; font-weight:700; letter-spacing:.5px; }
 .count-chip { background: var(--accent); color:#fff; padding:4px 10px 5px; font-size:.85rem; border-radius: 999px; font-weight:600; box-shadow: var(--shadow-sm); }
-.theme-toggle { background: var(--bg); border:1px solid var(--border); width:44px; height:44px; display:grid; place-items:center; font-size:1.25rem; border-radius: 14px; cursor:pointer; transition: background .25s, border-color .25s, transform .25s; }
+.theme-toggle { background: var(--bg); border:1px solid var(--border); color: var(--text); width:44px; height:44px; display:grid; place-items:center; font-size:1.25rem; border-radius: 14px; cursor:pointer; transition: background .25s, border-color .25s, transform .25s; }
 .theme-toggle:hover { background: var(--accent); color:#fff; border-color: var(--accent); transform: translateY(-2px); }
 .theme-toggle:active { transform: translateY(0); }
 .header-actions { display:flex; align-items:center; gap:10px; }
-.user-chip { background: var(--bg); border:1px solid var(--border); padding:6px 12px; border-radius:999px; font-size:.8rem; font-weight:600; letter-spacing:.5px; }
+.user-chip { background: var(--bg); border:1px solid var(--border); color: var(--text); padding:6px 12px; border-radius:999px; font-size:.8rem; font-weight:600; letter-spacing:.5px; }
 .logout-btn { background: var(--danger); color:#fff; border:none; padding:10px 16px; border-radius: var(--radius-md); cursor:pointer; font-weight:600; font-size:.75rem; letter-spacing:.5px; }
 .logout-btn:hover { background: var(--danger-hover); }
 
 h1 { margin-top:0; }
 
 .todo-input-form { display:flex; gap:10px; align-items:center; position:relative; }
-.todo-input-form input { flex:1; padding:14px 16px; border:1px solid var(--border); background: var(--bg); border-radius: var(--radius-md); font-size:1rem; outline:none; transition:border-color .2s, background .2s, box-shadow .2s; }
+.todo-input-form input { flex:1; padding:14px 16px; border:1px solid var(--border); background: var(--bg); color: var(--text); border-radius: var(--radius-md); font-size:1rem; outline:none; transition:border-color .2s, background .2s, box-shadow .2s; }
+.todo-input-form input::placeholder { color: var(--text-soft); }
 .todo-input-form input:focus { border-color: var(--accent); box-shadow: var(--focus); }
 .todo-input-form button { padding:13px 24px; border:none; background: var(--accent); color:#fff; border-radius: var(--radius-md); cursor:pointer; font-weight:600; letter-spacing:.5px; font-size:.95rem; display:inline-flex; align-items:center; gap:6px; position:relative; overflow:hidden; }
 .todo-input-form button::before { content:""; position:absolute; inset:0; background: linear-gradient(120deg,rgba(255,255,255,.4),transparent 40%); opacity:0; transition:opacity .4s; }
@@ -83,7 +84,8 @@ h1 { margin-top:0; }
 .auth-form { display:flex; flex-direction:column; gap:16px; background: var(--bg); border:1px solid var(--border); padding:28px 30px 34px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
 .auth-form h2 { margin:0 0 4px; font-size:1.4rem; letter-spacing:.5px; }
 .auth-form label { display:flex; flex-direction:column; gap:4px; font-size:.8rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color: var(--text-soft); }
-.auth-form input { padding:12px 14px; border:1px solid var(--border); background: var(--bg-alt); border-radius: var(--radius-md); outline:none; font-size:.95rem; }
+.auth-form input { padding:12px 14px; border:1px solid var(--border); background: var(--bg-alt); color: var(--text); border-radius: var(--radius-md); outline:none; font-size:.95rem; }
+.auth-form input::placeholder { color: var(--text-soft); }
 .auth-form input:focus { border-color: var(--accent); box-shadow: var(--focus); }
 .auth-form button[type=submit] { margin-top:4px; background: var(--accent); color:#fff; border:none; padding:12px 20px; border-radius: var(--radius-md); cursor:pointer; font-weight:600; letter-spacing:.5px; font-size:.9rem; }
 .auth-form button[type=submit]:hover { background: var(--accent-hover); }

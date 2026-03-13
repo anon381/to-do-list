@@ -49,6 +49,59 @@
           "createdAt": "2025-08-14T13:06:50.913Z"
         }
       ]
+    },
+    {
+      "id": "9c961f8f-2764-4462-86e5-994012ded2ab",
+      "username": "user9627ed",
+      "passwordHash": "$2a$10$DqEeuyCTB16AnUJHHiWL1exlcGXbjJk5H7.M7.VX8vwepsGL/pIt.",
+      "token": "c55fed4f-4131-46e7-84e2-3bc669077427",
+      "todos": [
+        {
+          "id": "1e851957-3531-4ace-867b-82d7f0e17c73",
+          "text": "hello task",
+          "done": false,
+          "createdAt": "2026-03-13T18:12:26.471Z"
+        }
+      ]
+    },
+    {
+      "id": "0ad66884-ec5a-420a-ab50-2f67705ef7e0",
+      "username": "webd170a9",
+      "passwordHash": "$2a$10$YBTrGjwe7a2p624IYklQ7Oln5F7fijaSIlO47zl80EsO0N3HWqa7a",
+      "token": "ae3747e9-7e78-4258-b98d-7b65ac6b0eab",
+      "todos": [
+        {
+          "id": "60484592-14c2-4a11-8329-817066f38119",
+          "text": "browser path ok",
+          "done": false,
+          "createdAt": "2026-03-13T18:22:57.784Z"
+        }
+      ]
+    },
+    {
+      "id": "c807c476-b798-4492-a732-7aafece94795",
+      "username": "anonn",
+      "passwordHash": "$2a$10$yps5l9iuaEtEfEeo7jYJIeqkhycH/rrjo2mAgy3SbYopDYpm/lrKK",
+      "token": "c236095f-0f47-400e-a132-8603ed283451",
+      "todos": []
+    },
+    {
+      "id": "e5f6eec0-3f4b-4239-a07e-d3f8615207bd",
+      "name": "Test Person",
+      "username": "Test Person",
+      "email": "person813eaa@example.com",
+      "passwordHash": "$2a$10$4v6ZQecaq3k5IsyjTZUPLuHIfsvshmbfFgYpWLQHLLqdn0eJ46atu",
+      "token": "079e0581-9130-4f12-acb1-078210533621",
+      "todos": []
+    },
+    {
+      "id": "0d5668cd-671e-45e3-8db8-06ff90ec8a12",
+      "name": "Yabets Maregn",
+      "username": "Yabets Maregn",
+      "email": "yabetsanon@gmail.com",
+      "passwordHash": "$2a$10$A3nF4cV/ptmX9azg996qCuqI2Q23jCFJOLO1IV3F3RApGAlgseCJG",
+      "token": "8d285c3e-ce3c-427b-a1ff-00cac7b1e04c",
+      "todos": []
     }
   ]
 }
